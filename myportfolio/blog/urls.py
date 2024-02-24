@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.post_list, name='post_list'),
@@ -10,4 +12,4 @@ urlpatterns = [
     path('post/<int:pk>/comment/', views.add_comment_to_post, name='add_comment_to_post'),
     path('post/<int:pk>/like/', views.like_post, name='like_post'),
     path('post/<int:pk>/unlike/', views.unlike_post, name='unlike_post'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

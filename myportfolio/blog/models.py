@@ -5,9 +5,9 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField()
-    image = models.ImageField(upload_to='post_images/', null=True, blank=True)  # Image field
-    image_name = models.CharField(max_length=100, null=True, blank=True)  # Name of the image
-    image_description = models.TextField(null=True, blank=True)  # Description of the image
+    image = models.ImageField(upload_to='post_images/', null=True, blank=True)  # Add this line for the image field
+    image_name = models.CharField(max_length=100, null=True, blank=True)
+    image_description = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

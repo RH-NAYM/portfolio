@@ -6,18 +6,9 @@
 <body>
     <h1>{{ post.title }}</h1>
     <p>{{ post.content }}</p>
-    <p>Author: {{ post.author }}</p>
-    <p>Likes: {{ post.likes.count }}</p>
-    {% if liked %}
-        <form method="post" action="{% url 'unlike_post' post.pk %}">
-            {% csrf_token %}
-            <button type="submit">Unlike</button>
-        </form>
-    {% else %}
-        <form method="post" action="{% url 'like_post' post.pk %}">
-            {% csrf_token %}
-            <button type="submit">Like</button>
-        </form>
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.image_name }}">
+        <p>{{ post.image_description }}</p>
     {% endif %}
     <h2>Comments:</h2>
     <ul>

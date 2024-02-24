@@ -5,6 +5,10 @@ from .forms import PostForm, CommentForm
 from .forms import PostForm
 
 
+# views.py
+from django.shortcuts import render, redirect
+from .forms import PostForm
+
 def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)  # Pass request.FILES to handle image upload
@@ -16,6 +20,7 @@ def post_create(request):
     else:
         form = PostForm()
     return render(request, 'blog/post_form.html', {'form': form})
+
 
 def post_list(request):
     posts = Post.objects.all()
