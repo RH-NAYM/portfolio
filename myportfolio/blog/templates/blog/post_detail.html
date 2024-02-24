@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ post.title }}</title>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    <p>Author: {{ post.author }}</p>
+    <p>Likes: {{ post.likes.count }}</p>
+    {% if liked %}
+        <form method="post" action="{% url 'unlike_post' post.pk %}">
+            {% csrf_token %}
+            <button type="submit">Unlike</button>
+        </form>
+    {% else %}
+        <form method="post" action="{% url 'like_post' post.pk %}">
+            {% csrf_token %}
+            <button type="submit">Like</button>
+        </form>
+    {% endif %}
+    <h2>Comments:</h2>
+    <ul>
+        {% for comment in comments %}
+            <li>{{ comment.content }} - {{ comment.user }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Add Comment:</h2>
+    <form method="post" action="{% url 'add_comment_to_post' post.pk %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
